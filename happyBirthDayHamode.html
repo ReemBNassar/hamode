@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عيد ميلاد سعيد حمودي</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #fceabb 0%, #f8b500 100%);
+            font-family: 'Tajawal', sans-serif;
+            overflow: hidden;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            transform: scale(0.9);
+            animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes popIn {
+            to {
+                transform: scale(1);
+            }
+        }
+
+        .cake {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #d35400;
+            margin: 10px 0;
+            font-size: 2.5rem;
+        }
+
+        p {
+            color: #555;
+            line-height: 1.6;
+            font-size: 1.2rem;
+        }
+
+        .btn {
+            background: #e67e22;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 20px;
+            font-family: 'Tajawal', sans-serif;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #d35400;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .decoration {
+            position: absolute;
+            font-size: 25px;
+            opacity: 0.5;
+            animation: float 3s infinite ease-in-out;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+        <div class="cake">🎂</div>
+        <h1>كل عام وأنت بخير يا حمودي</h1>
+        <p>خالتو ريم...يا رب اشوفك احلى بشمهندس بالكوكب يا قلبي انت.. يا أحلى حمودي بالدنيا ✨</p>
+        <button class="btn" onclick="celebrate()">بتحب حمود اضغط و كيف معه🎉</button>
+    </div>
+
+    <script>
+        // دالة إطلاق القصاصات الملونة عند التحميل
+        window.onload = function () {
+            celebrate();
+        };
+
+        function celebrate() {
+            var duration = 3 * 1000;
+            var end = Date.now() + duration;
+
+            (function frame() {
+                confetti({
+                    particleCount: 5,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: ['#ff0000', '#ffaa00', '#ffffff', '#00ff00']
+                });
+                confetti({
+                    particleCount: 5,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: ['#ff0000', '#ffaa00', '#ffffff', '#00ff00']
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        }
+    </script>
+</body>
+
+</html>
