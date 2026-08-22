@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مملكة الفراشات - مركز التحديات والألعاب لعمور! 🦋✨</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #a8edd9 0%, #fed6e3 100%);
+            min-height: 100vh;
+            padding: 20px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        /* حاوية الفراشات الخلفية */
+        #bg-butterflies {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .floating-bf {
+            position: absolute;
+            font-size: 1.8rem;
+            animation: float 5s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-25px) rotate(15deg);
+            }
+        }
+
+        /* الكارت الرئيسي */
+        .main-card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(10px);
+            padding: 30px 25px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 680px;
+            width: 100%;
+            z-index: 10;
+            margin-bottom: 25px;
+            border: 2px solid #fff;
+        }
+
+        /* شريط رئيسة الفريق */
+        .leader-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #e040fb, #7c4dff);
+            color: #fff;
+            padding: 10px 26px;
+            border-radius: 50px;
+            font-size: 1.15rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(124, 77, 255, 0.3);
+        }
+
+        .section-title {
+            color: #7c4dff;
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        h1 {
+            color: #d63384;
+            font-size: 2.1rem;
+            margin-bottom: 8px;
+            font-weight: 800;
+        }
+
+        /* عبارة أنا فراشة وانت فراشة */
+        .butterfly-slogan {
+            color: #d63384;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: rgba(255, 182, 193, 0.25);
+            display: inline-block;
+            padding: 6px 18px;
+            border-radius: 20px;
+        }
+
+        /* قسم الأعضاء */
+        .members-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin: 15px 0 20px;
+        }
+
+        .members-list {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            font-weight: bold;
+            color: #333;
+            flex-wrap: wrap;
+        }
+
+        .member {
+            background: #fff;
+            padding: 8px 18px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            border: 1px solid #ffb6c1;
+            font-size: 1rem;
+        }
+
+        /* بطاقة عمرو المستقلة */
+        .amr-card {
+            background: linear-gradient(45deg, #fff3bf, #ffd43b);
+            color: #854d0e;
+            padding: 10px 24px;
+            border-radius: 25px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 12px rgba(250, 176, 5, 0.25);
+            border: 2px solid #ffe066;
+            margin-top: 5px;
+        }
+
+        /* بطاقة التهنئة المعايدة */
+        .greeting-card {
+            background: linear-gradient(135deg, #ffffff 0%, #fff0f6 100%);
+            border: 3px dashed #ff85c0;
+            border-radius: 25px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 10px 20px rgba(255, 133, 192, 0.15);
+            position: relative;
+        }
+
+        .greeting-card::before {
+            content: '💌';
+            font-size: 2rem;
+            position: absolute;
+            top: -20px;
+            right: 25px;
+            background: #fff;
+            padding: 0 8px;
+            border-radius: 50%;
+        }
+
+        .greeting-title {
+            color: #c41d7f;
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .greeting-text {
+            color: #434343;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            font-weight: 600;
+        }
+
+        .greeting-signature {
+            margin-top: 15px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #7c4dff;
+        }
+
+        /* قسم الألعاب */
+        .games-container {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+            width: 100%;
+            max-width: 680px;
+            z-index: 10;
+        }
+
+        .game-box {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 22px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .game-title {
+            color: #0d6efd;
+            font-size: 1.35rem;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #ff758c, #ff7eb3);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 117, 140, 0.4);
+        }
+
+        .btn-green {
+            background: linear-gradient(45deg, #10b981, #34d399);
+        }
+
+        .btn-purple {
+            background: linear-gradient(45deg, #8b5cf6, #a78bfa);
+        }
+
+        .btn-orange {
+            background: linear-gradient(45deg, #f97316, #fb923c);
+        }
+
+        /* لعبة 1: اصطياد الفراشات */
+        #game-area {
+            height: 180px;
+            background: #f0fdf4;
+            border: 2px dashed #86efac;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            margin-top: 10px;
+            cursor: crosshair;
+        }
+
+        .target-butterfly {
+            position: absolute;
+            font-size: 2.5rem;
+            user-select: none;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+
+        .score-board {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #15803d;
+            margin-bottom: 5px;
+        }
+
+        /* لعبة 2: الذاكرة */
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            max-width: 320px;
+            margin: 15px auto 0;
+        }
+
+        .memory-card {
+            height: 70px;
+            background: #e0f2fe;
+            border: 2px solid #38bdf8;
+            border-radius: 12px;
+            font-size: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            transition: transform 0.3s;
+        }
+
+        .memory-card.flipped {
+            background: #fff;
+            transform: rotateY(180deg);
+        }
+
+        /* لعبة 3: السرعة والتفاعل */
+        #click-box {
+            width: 100%;
+            height: 120px;
+            background: #fef3c7;
+            border: 2px dashed #f59e0b;
+            border-radius: 15px;
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #b45309;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        /* لعبة 4: اختبار الذكاء */
+        .quiz-option {
+            background: #f3f4f6;
+            border: 1px solid #d1d5db;
+            padding: 10px 15px;
+            border-radius: 12px;
+            margin: 8px 0;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .quiz-option:hover {
+            background: #e5e7eb;
+            transform: translateX(-5px);
+        }
+
+        /* لعبة 5: عجلة الأمنيات */
+        #wish-result {
+            margin-top: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #d63384;
+            min-height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="bg-butterflies"></div>
+
+    <!-- البطاقة الرئيسية -->
+    <div class="main-card">
+        <!-- 1. شريط رئيسة الفريق -->
+        <div class="leader-badge">
+            👑 الرئيسة: المهندسة ريم (أجمل خالة بالمجرة) ✨
+        </div>
+
+        <!-- 2. قسم أعضاء الفريق ومهندسي المستقبل -->
+        <div class="members-container">
+            <div class="section-title">🛠️ مهندسين المستقبل - فريق الفراشات 🦋:</div>
+
+            <div class="members-list">
+                <div class="member">حمود 🦋</div>
+                <div class="member">هيثومة 🦋</div>
+            </div>
+
+            <div class="amr-card">
+                عمرو توبة نصار - مهندس المستقبل 👷‍♂️✨
+            </div>
+        </div>
+
+        <!-- 3. العنوان الترحيبي -->
+        <h1>ألف حمدًا لله على السلامة يا عمور! 🌸🦋</h1>
+
+        <!-- 4. الجملة الإضافية الخاصة بفريق الفراشات -->
+        <div class="butterfly-slogan">
+            أنا فراشة وانت فراشة وإحنا فريق الفراشات 🦋✨
+        </div>
+
+        <!-- 5. بطاقة التهنئة المعايدة -->
+        <div class="greeting-card">
+            <div class="greeting-title">🎉 بطاقة تهنئة خاصة من الفريق 🎉</div>
+            <div class="greeting-text">
+                إلى بطلنا الغالي مهندس المستقبل **عمور**،<br>
+                ألف حمدًا لله على سلامتك يا بطل! نتمنى لك دوام الصحة والعافية والابتسامة الحلوة التي تنور دنيتنا دائمًا.
+                نحن فخورون بك جدًا وسعداء برؤيتك بطلًا قويًا ومتميزًا! 💖🌟
+            </div>
+            <div class="greeting-signature">
+                مع كل الحب والتحايا من: المهندسة ريم، حمود، وهيثومة 🦋✨
+            </div>
+        </div>
+
+        <!-- 6. النص الترحيبي -->
+        <p style="font-size: 1.05rem; color: #4a4a4a; line-height: 1.6;">
+            خطاك الشر يا بطل! رئيستنا المهندسة ريم والفريق جهزوا لك منطقة تحديات وألعاب خاصة وممتعة جدًا لتتحدى نفسك
+            وتتسلى معنا!
+        </p>
+    </div>
+
+    <!-- قسم الألعاب والتحديات -->
+    <div class="games-container">
+
+        <!-- التحدي 1: اصطياد الفراشات -->
+        <div class="game-box">
+            <div class="game-title">🎯 التحدي الأول: اصطياد الفراشات السريعة</div>
+            <div class="score-board">النتيجة: <span id="score">0</span> 🦋</div>
+            <p style="font-size: 0.9rem; color: #666;">اصطاد أكبر عدد من الفراشات خلال 15 ثانية!</p>
+            <button class="btn" onclick="startGame1()">ابدأ التحدي! 🚀</button>
+            <div id="game-area"></div>
+        </div>
+
+        <!-- التحدي 2: لعبة تطابق الذاكرة -->
+        <div class="game-box">
+            <div class="game-title">🧠 التحدي الثاني: تطابق ذاكرة الفراشات</div>
+            <p style="font-size: 0.9rem; color: #666;">افتح الكروت واكتشف الأزواج المتطابقة بأقل عدد محاولات!</p>
+            <button class="btn btn-purple" onclick="initMemoryGame()">ابدأ لعبة الذاكرة 🃏</button>
+            <div class="memory-grid" id="memory-grid"></div>
+        </div>
+
+        <!-- التحدي 3: تحدي سرعة النقرات -->
+        <div class="game-box">
+            <div class="game-title">⚡ التحدي الثالث: زر الطاقة الخارقة (سرعة الضغط)</div>
+            <p style="font-size: 0.9rem; color: #666;">اضغط على الصندوق الأصفر بأكبر عدد ممكن خلال 10 ثوانٍ!</p>
+            <button class="btn btn-orange" onclick="startClickChallenge()">ابدأ تحدي السرعة ⚡</button>
+            <div id="click-box" onclick="registerClick()">اضغط هنا للبدء!</div>
+        </div>
+
+        <!-- التحدي 4: أسئلة واختبارات عمور -->
+        <div class="game-box">
+            <div class="game-title">💡 التحدي الرابع: اختبار الذكاء السريع</div>
+            <p id="quiz-question" style="font-size: 1.1rem; font-weight: bold; margin: 10px 0; color: #333;">اضغط ابدأ
+                لبدء الأسئلة!</p>
+            <div id="quiz-options"></div>
+            <button class="btn btn-green" onclick="startQuiz()">ابدأ الاختبار 🧩</button>
+        </div>
+
+        <!-- التحدي 5: عجلة الأمنيات والتحديات -->
+        <div class="game-box">
+            <div class="game-title">🎁 التحدي الخامس: عجلة أوامر المهندسة ريم والحشود</div>
+            <p style="font-size: 0.9rem; color: #666;">اسحب واعرف التحدي أو المكافأة الموجهة لك من الفريق اليوم!</p>
+            <button class="btn" onclick="spinWish()">اسحب المفاجأة ✨</button>
+            <div id="wish-result"></div>
+        </div>
+
+    </div>
+
+    <script>
+        // توليد فراشات الخلفية
+        const bgContainer = document.getElementById('bg-butterflies');
+        for (let i = 0; i < 15; i++) {
+            const bf = document.createElement('div');
+            bf.className = 'floating-bf';
+            bf.innerText = '🦋';
+            bf.style.left = Math.random() * 100 + 'vw';
+            bf.style.top = Math.random() * 100 + 'vh';
+            bf.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            bgContainer.appendChild(bf);
+        }
+
+        // --- 1. لعبة اصطياد الفراشات ---
+        let score = 0;
+        let gameInterval;
+        let isGaming = false;
+
+        function startGame1() {
+            if (isGaming) return;
+            isGaming = true;
+            score = 0;
+            document.getElementById('score').innerText = score;
+            const gameArea = document.getElementById('game-area');
+            gameArea.innerHTML = '';
+
+            gameInterval = setInterval(() => {
+                spawnButterfly();
+            }, 600);
+
+            setTimeout(() => {
+                clearInterval(gameInterval);
+                gameArea.innerHTML = '';
+                alert(`كفو يا عمور! اصطدت ${score} فراشة بإشراف المهندسة ريم! 🏆`);
+                isGaming = false;
+            }, 15000);
+        }
+
+        function spawnButterfly() {
+            const gameArea = document.getElementById('game-area');
+            const bf = document.createElement('div');
+            bf.className = 'target-butterfly';
+            bf.innerText = ['🦋', '✨', '🌸', '👑'][Math.floor(Math.random() * 4)];
+
+            const maxX = gameArea.clientWidth - 50;
+            const maxY = gameArea.clientHeight - 50;
+
+            bf.style.left = Math.max(0, Math.floor(Math.random() * maxX)) + 'px';
+            bf.style.top = Math.max(0, Math.floor(Math.random() * maxY)) + 'px';
+
+            bf.onclick = () => {
+                score++;
+                document.getElementById('score').innerText = score;
+                bf.remove();
+            };
+
+            gameArea.appendChild(bf);
+
+            setTimeout(() => {
+                if (bf.parentNode) bf.remove();
+            }, 1200);
+        }
+
+        // --- 2. لعبة تطابق الذاكرة ---
+        const icons = ['🦋', '👑', '🌸', '🍕', '🦋', '👑', '🌸', '🍕'];
+        let flippedCards = [];
+        let matchedPairs = 0;
+
+        function initMemoryGame() {
+            const grid = document.getElementById('memory-grid');
+            grid.innerHTML = '';
+            flippedCards = [];
+            matchedPairs = 0;
+
+            const shuffled = [...icons].sort(() => Math.random() - 0.5);
+
+            shuffled.forEach((icon, index) => {
+                const card = document.createElement('div');
+                card.className = 'memory-card';
+                card.dataset.icon = icon;
+                card.dataset.index = index;
+                card.innerText = '❓';
+
+                card.onclick = () => flipCard(card);
+                grid.appendChild(card);
+            });
+        }
+
+        function flipCard(card) {
+            if (flippedCards.length < 2 && !card.classList.contains('flipped')) {
+                card.classList.add('flipped');
+                card.innerText = card.dataset.icon;
+                flippedCards.push(card);
+
+                if (flippedCards.length === 2) {
+                    setTimeout(checkMatch, 700);
+                }
+            }
+        }
+
+        function checkMatch() {
+            const [c1, c2] = flippedCards;
+            if (c1.dataset.icon === c2.dataset.icon) {
+                matchedPairs++;
+                if (matchedPairs === 4) {
+                    alert('عاش يا عمور! أنجزت تحدي الذاكرة بنجاح 🧠✨');
+                }
+            } else {
+                c1.classList.remove('flipped');
+                c1.innerText = '❓';
+                c2.classList.remove('flipped');
+                c2.innerText = '❓';
+            }
+            flippedCards = [];
+        }
+
+        // --- 3. تحدي سرعة الضغط ---
+        let clickCount = 0;
+        let isClickingActive = false;
+
+        function startClickChallenge() {
+            if (isClickingActive) return;
+            isClickingActive = true;
+            clickCount = 0;
+            const clickBox = document.getElementById('click-box');
+            clickBox.innerText = "اضغط بسرعة بأقصى ما عندك!! 🔥";
+
+            setTimeout(() => {
+                isClickingActive = false;
+                alert(`طاقة خارقة! ضغطت ${clickCount} ضغطة في 10 ثوانٍ! ⚡💪`);
+                clickBox.innerText = "اضغط ابدأ لتكرار التحدي!";
+            }, 10000);
+        }
+
+        function registerClick() {
+            if (isClickingActive) {
+                clickCount++;
+                document.getElementById('click-box').innerText = `عدد النقرات: ${clickCount} 🔥`;
+            }
+        }
+
+        // --- 4. تحدي أسئلة عمور ---
+        const questions = [
+            {
+                q: "من هي أجمل خالة بالمجرة ورئيسة الفريق؟",
+                options: ["المهندسة ريم 👑", "شخص آخر", "لا أحد"],
+                ans: 0
+            },
+            {
+                q: "ما هو اسم الفريق الذي أعد الصفحة لعمور؟",
+                options: ["فريق النشور", "فريق الفراشات 🦋", "فريق النجوم"],
+                ans: 1
+            },
+            {
+                q: "من هما أبطال الفريق إلى جانب المهندسة ريم؟",
+                options: ["حمود وهيثومة 👬", "سوبرمان وباتمان", "مجهولين"],
+                ans: 0
+            }
+        ];
+        let currentQ = 0;
+
+        function startQuiz() {
+            currentQ = 0;
+            showQuestion();
+        }
+
+        function showQuestion() {
+            if (currentQ >= questions.length) {
+                document.getElementById('quiz-question').innerText = "ألف مبروك! جاوبت على كل الأسئلة بنجاح 100% 🏆";
+                document.getElementById('quiz-options').innerHTML = '';
+                return;
+            }
+
+            const qData = questions[currentQ];
+            document.getElementById('quiz-question').innerText = `سؤال (${currentQ + 1}/${questions.length}): ${qData.q}`;
+
+            const optionsDiv = document.getElementById('quiz-options');
+            optionsDiv.innerHTML = '';
+
+            qData.options.forEach((opt, idx) => {
+                const optBtn = document.createElement('div');
+                optBtn.className = 'quiz-option';
+                optBtn.innerText = opt;
+                optBtn.onclick = () => {
+                    if (idx === qData.ans) {
+                        alert("إجابة صحيحة يا بطل! 👏");
+                        currentQ++;
+                        showQuestion();
+                    } else {
+                        alert("حاول مرة ثانية يا عمور! 😉");
+                    }
+                };
+                optionsDiv.appendChild(optBtn);
+            });
+        }
+
+        // --- 5. عجلة الأمنيات والتحديات ---
+        const wishes = [
+            "👑 أمر ملكي من المهندسة ريم (أجمل خالة بالمجرة): عمور ملك اليوم ومسموح له يطلب أي شيء!",
+            "🍕 هيثومة يعزم عمور على وجبة بيتزا لديدة من اختياره!",
+            "🎮 حمود يتطوع ليخسر ضد عمور في أي لعبة فيديو يختارها!",
+            "💖 المهندسة ريم ترسل لعمور أكبر حضن وأصدق الدعوات بالشفاء العاجل!",
+            "🎈 تحدي: عمور يطلب طلب معين من حمود وهيثومة ولازم ينفذوه فوراً!",
+            "🏆 عمور يتوج برتبة 'بطل المجرة' للسلامة والروح الحلوة!"
+        ];
+
+        function spinWish() {
+            const resultDiv = document.getElementById('wish-result');
+            resultDiv.innerText = "جاري السحب بأمر المهندسة ريم... 🎲";
+            setTimeout(() => {
+                const randomWish = wishes[Math.floor(Math.random() * wishes.length)];
+                resultDiv.innerText = randomWish;
+            }, 800);
+        }
+    </script>
+</body>
+
+</html>
