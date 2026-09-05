@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hacker Terminal - هديل 🎓</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Cairo', monospace, sans-serif;
+            background-color: #000;
+            color: #00ff41;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* --- Canvas الخلفية المتحركة --- */
+        #matrix-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* --- حاوية المحتوى --- */
+        .container {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 650px;
+            background: rgba(5, 15, 5, 0.88);
+            border: 2px solid #00ff41;
+            box-shadow: 0 0 25px rgba(0, 255, 65, 0.4), inset 0 0 15px rgba(0, 255, 65, 0.15);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .terminal-header {
+            border-bottom: 1px solid rgba(0, 255, 65, 0.4);
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+            text-align: left;
+            direction: ltr;
+            font-family: monospace;
+            font-size: 14px;
+            color: rgba(0, 255, 65, 0.8);
+        }
+
+        h1 {
+            color: #00ff41;
+            font-size: 24px;
+            text-shadow: 0 0 12px #00ff41;
+            margin-bottom: 15px;
+        }
+
+        p {
+            color: #d0ffd0;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .challenge-box {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px dashed #00ff41;
+            background: rgba(0, 255, 65, 0.05);
+            border-radius: 8px;
+        }
+
+        input[type="text"] {
+            width: 80%;
+            padding: 12px;
+            background: #000;
+            border: 1px solid #00ff41;
+            border-radius: 6px;
+            color: #00ff41;
+            font-family: 'Cairo', monospace;
+            text-align: center;
+            font-size: 16px;
+            outline: none;
+            box-shadow: 0 0 8px rgba(0, 255, 65, 0.2);
+            margin-top: 10px;
+        }
+
+        input[type="text"]:focus {
+            box-shadow: 0 0 15px #00ff41;
+        }
+
+        button {
+            background: rgba(0, 255, 65, 0.15);
+            color: #00ff41;
+            border: 1px solid #00ff41;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-family: 'Cairo', monospace;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
+        }
+
+        button:hover {
+            background: #00ff41;
+            color: #000;
+            box-shadow: 0 0 20px #00ff41;
+            transform: scale(1.02);
+        }
+
+        .media-content {
+            display: none;
+            margin-top: 20px;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        /* تنسيق الصور الجديدة */
+        .media-content img {
+            width: 100%;
+            max-height: 320px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid #00ff41;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+            margin-top: 10px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+
+<body>
+
+    <canvas id="matrix-canvas"></canvas>
+
+    <div class="container">
+        <div class="terminal-header">&gt; SYSTEM_ROOT@HADEEL:~# init_birthday_protocol</div>
+
+        <h1>[ SYSTEM ACCESS REQUIRED ]</h1>
+        <p>فك التشفير مطلوب من المهندسة هديل ⚡</p>
+
+        <div id="challenge1" class="challenge-box">
+            <h3>🔒 التحدي الأول: اختبار الزملاء</h3>
+            <p>أكتر بنت كنا ما نطيقها بجروب برمجيات؟ ☕</p>
+            <input type="text" id="answer1" placeholder="اكتبي الإجابة...">
+            <br>
+            <button onclick="checkChallenge(1, ['الفراشة', 'كل البنات'])">RUN_DECRYPT 🚀</button>
+
+            <div id="result1" class="media-content">
+                <p style="color: #00ff41; font-weight: bold;">🎉 ACCESS GRANTED! تم فك التشفير بنجاح:</p>
+
+
+                <br>
+                <button onclick="nextChallenge(2)">NEXT_LEVEL ➡️</button>
+            </div>
+        </div>
+
+        <div id="challenge2" class="challenge-box hidden">
+            <h3>🔒 التحدي الثاني: لغز المشاريع</h3>
+            <p>شو أكتر إشي بنحب نعملو؟ 🐛</p>
+            <input type="text" id="answer2" placeholder="اكتبي الإجابة...">
+            <br>
+            <button onclick="checkChallenge(2, ['المشاكل', 'مشاكل'])">VERIFY_SYSTEM 🚀</button>
+
+            <div id="result2" class="media-content">
+                <p style="color: #00ff41; font-weight: bold;">🥳 كفووو يا مهندسة! صح مية بالمية:</p>
+                <br>
+                <button onclick="nextChallenge(3)">FINAL_STAGE 💖</button>
+            </div>
+        </div>
+
+        <div id="challenge3" class="challenge-box hidden">
+            <h3>🔒 التحدي الثالث: كلمة السر</h3>
+            <p>مين أفضل زميلة مهندسة بالكون؟ 👑</p>
+            <input type="text" id="answer3" placeholder="اكتبي الاسم...">
+            <br>
+            <button onclick="checkChallenge(3, ['ريم', 'reem'])">UNLOCK_GIFT 🎁</button>
+
+            <div id="result3" class="media-content">
+                <h2 style="color: #00ff41; text-shadow: 0 0 10px #00ff41;">🎓 كل عام وأنتِ بقمة النجاح والتألق يا هديل!
+                    🎓</h2>
+                <p>سنة جديدة سعيدة عليكِ، أنجح وأفضل مهندسة! 🚀🎈</p>
+                <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1000&auto=format&fit=crop"
+                    alt="Celebration Lights">
+
+                <div id="confetti-spammer" class="hidden" style="margin-top: 20px;">
+                    <button id="spam-button" onclick="celebrateLoudly()">🎉 فجري المفرقعات! 🎉</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const chars = '01100101010101010101010101010101010010101010101010101010101010100101010100101001001001';
+        const fontSize = 16;
+        let columns = Math.floor(canvas.width / fontSize);
+        let drops = Array(columns).fill(1);
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#00ff41';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = chars[Math.floor(Math.random() * chars.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(drawMatrix, 33);
+
+        function fireConfetti() {
+            confetti({particleCount: 100, spread: 70, origin: {y: 0.6}});
+        }
+
+        function celebrateLoudly() {
+            confetti({particleCount: 150, angle: 60, spread: 80, origin: {x: 0}});
+            confetti({particleCount: 150, angle: 120, spread: 80, origin: {x: 1}});
+        }
+
+        function checkChallenge(challengeNum, validAnswers) {
+            var inputVal = document.getElementById('answer' + challengeNum).value.trim().toLowerCase();
+            var resultDiv = document.getElementById('result' + challengeNum);
+
+            var normalizedInput = inputVal.replace(/[أإآ]/g, 'ا').replace(/ة/g, 'ه');
+            var isCorrect = validAnswers.some(function (answer) {
+                var normalizedAnswer = answer.toLowerCase().replace(/[أإآ]/g, 'ا').replace(/ة/g, 'ه');
+                return normalizedInput.includes(normalizedAnswer);
+            });
+
+            if (isCorrect) {
+                resultDiv.style.display = 'block';
+                fireConfetti();
+
+                if (challengeNum === 3) {
+                    document.getElementById('confetti-spammer').classList.remove('hidden');
+                }
+            } else {
+                alert('ACCESS_DENIED! الإجابة غير صحيحة فكري منيح 😉');
+            }
+        }
+
+        function nextChallenge(nextNum) {
+            var currentNum = nextNum - 1;
+            document.getElementById('challenge' + currentNum).classList.add('hidden');
+            document.getElementById('challenge' + nextNum).classList.remove('hidden');
+        }
+    </script>
+</body>
+
+</html>
