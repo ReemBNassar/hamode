@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CLASSIFIED — MANNA</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Orbitron:wght@500;700;900&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #050607;
+            color: #eee;
+            font-family: "Cairo", sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* =========================
+   BACKGROUND
+========================= */
+
+        body:before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background:
+                linear-gradient(rgba(255, 0, 40, .025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 0, 40, .025) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: -3;
+        }
+
+        body:after {
+            content: "";
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: #9b001f;
+            filter: blur(180px);
+            opacity: .08;
+            top: -300px;
+            left: -200px;
+            z-index: -2;
+        }
+
+        /* =========================
+   SCAN LINE
+========================= */
+
+        .scan {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #ff1744;
+            box-shadow: 0 0 20px #ff1744;
+            opacity: .4;
+            z-index: 999;
+            animation: scan 5s linear infinite;
+        }
+
+        @keyframes scan {
+
+            0% {
+                top: 0;
+            }
+
+            100% {
+                top: 100vh;
+            }
+
+        }
+
+        /* =========================
+   LOADING
+========================= */
+
+        .loader {
+            position: fixed;
+            inset: 0;
+            background: #050607;
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transition: 1s;
+        }
+
+        .loader.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-title {
+            font-family: Orbitron;
+            color: #ff1744;
+            font-size: clamp(25px, 6vw, 60px);
+            letter-spacing: 8px;
+        }
+
+        .loader-text {
+            margin-top: 20px;
+            color: #777;
+            font-size: 13px;
+            font-family: Orbitron;
+        }
+
+        .progress {
+            width: 260px;
+            height: 3px;
+            background: #222;
+            margin-top: 25px;
+            overflow: hidden;
+        }
+
+        .progress span {
+            display: block;
+            height: 100%;
+            background: #ff1744;
+            width: 0;
+            animation: loading 2.5s forwards;
+        }
+
+        @keyframes loading {
+            to {
+                width: 100%;
+            }
+        }
+
+        /* =========================
+   NAV
+========================= */
+
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(92%, 900px);
+            padding: 12px 20px;
+            background: rgba(5, 6, 7, .8);
+            border: 1px solid #292929;
+            backdrop-filter: blur(15px);
+            z-index: 500;
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+        }
+
+        nav a {
+            color: #777;
+            text-decoration: none;
+            font-size: 12px;
+            font-family: Orbitron;
+            transition: .3s;
+        }
+
+        nav a:hover {
+            color: #ff1744;
+        }
+
+        /* =========================
+   HERO
+========================= */
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 20px;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 1000px;
+        }
+
+        .classified {
+            font-family: Orbitron;
+            color: #ff1744;
+            letter-spacing: 6px;
+            font-size: 13px;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 {
+            font-family: Orbitron;
+            font-size: clamp(55px, 13vw, 150px);
+            font-weight: 900;
+            line-height: .9;
+            color: #fff;
+            text-shadow:
+                0 0 10px rgba(255, 0, 40, .3),
+                8px 8px 0 #45000d;
+        }
+
+        .hero h1 span {
+            color: #ff1744;
+        }
+
+        .subtitle {
+            margin-top: 30px;
+            color: #888;
+            font-size: 15px;
+            line-height: 2;
+        }
+
+        .warning {
+            margin: 35px auto;
+            width: min(100%, 600px);
+            border: 1px solid #4b101b;
+            background: #12080b;
+            padding: 15px;
+            color: #ff657f;
+            font-family: Orbitron;
+            font-size: 11px;
+        }
+
+        .enter {
+            padding: 16px 35px;
+            border: 1px solid #ff1744;
+            background: #ff1744;
+            color: white;
+            font-family: Cairo;
+            font-weight: bold;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: .3s;
+        }
+
+        .enter:hover {
+            background: #c9002b;
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(255, 23, 68, .35);
+        }
+
+        .corner {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-color: #ff1744;
+        }
+
+        .c1 {
+            top: 100px;
+            left: 60px;
+            border-top: 1px solid;
+            border-left: 1px solid;
+        }
+
+        .c2 {
+            top: 100px;
+            right: 60px;
+            border-top: 1px solid;
+            border-right: 1px solid;
+        }
+
+        .c3 {
+            bottom: 80px;
+            left: 60px;
+            border-bottom: 1px solid;
+            border-left: 1px solid;
+        }
+
+        .c4 {
+            bottom: 80px;
+            right: 60px;
+            border-bottom: 1px solid;
+            border-right: 1px solid;
+        }
+
+        /* =========================
+   SECTIONS
+========================= */
+
+        section {
+            max-width: 1100px;
+            margin: auto;
+            padding: 110px 20px;
+        }
+
+        .section-label {
+            color: #ff1744;
+            font-family: Orbitron;
+            font-size: 11px;
+            letter-spacing: 4px;
+        }
+
+        .section-title {
+            font-family: Orbitron;
+            font-size: clamp(30px, 6vw, 65px);
+            margin-top: 12px;
+            margin-bottom: 50px;
+        }
+
+        /* =========================
+   FILE
+========================= */
+
+        .file {
+            border: 1px solid #292929;
+            background: #090a0b;
+            padding: 35px;
+            position: relative;
+            box-shadow: 0 20px 80px rgba(0, 0, 0, .5);
+        }
+
+        .file:before {
+            content: "TOP SECRET";
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #ff1744;
+            border: 1px solid #ff1744;
+            padding: 5px 12px;
+            font-family: Orbitron;
+            font-size: 10px;
+            transform: rotate(-8deg);
+        }
+
+        .file-grid {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 35px;
+        }
+
+        .avatar {
+            height: 280px;
+            background:
+                linear-gradient(135deg, #22030a, #090909);
+            border: 1px solid #3b1119;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .avatar:before {
+            content: "M";
+            font-family: Orbitron;
+            font-size: 130px;
+            color: #ff1744;
+            text-shadow: 0 0 40px rgba(255, 23, 68, .3);
+        }
+
+        .info h3 {
+            font-family: Orbitron;
+            color: #fff;
+            font-size: 30px;
+            margin-bottom: 25px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #202020;
+            padding: 14px 0;
+            gap: 20px;
+        }
+
+        .info-row span:first-child {
+            color: #666;
+        }
+
+        .info-row span:last-child {
+            color: #ddd;
+            font-weight: bold;
+        }
+
+        /* =========================
+   MESSAGE
+========================= */
+
+        .message {
+            border-left: 3px solid #ff1744;
+            padding: 30px;
+            background: #0a0b0c;
+            line-height: 2.2;
+            color: #bcbcbc;
+            position: relative;
+        }
+
+        .message strong {
+            color: #ff1744;
+        }
+
+        .signature {
+            margin-top: 30px;
+            color: #fff;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        /* =========================
+   GANG
+========================= */
+
+        .gang {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .gang-card {
+            background: #090a0b;
+            border: 1px solid #222;
+            padding: 35px 25px;
+            min-height: 220px;
+            transition: .4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gang-card:before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: #ff1744;
+            top: 0;
+            left: -100%;
+            transition: .4s;
+        }
+
+        .gang-card:hover:before {
+            left: 0;
+        }
+
+        .gang-card:hover {
+            transform: translateY(-8px);
+            border-color: #48121c;
+        }
+
+        .number {
+            font-family: Orbitron;
+            color: #ff1744;
+            font-size: 35px;
+        }
+
+        .gang-card h3 {
+            margin-top: 20px;
+        }
+
+        .gang-card p {
+            color: #777;
+            font-size: 13px;
+            line-height: 2;
+            margin-top: 10px;
+        }
+
+        /* =========================
+   MEMORIES
+========================= */
+
+        .memories {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .memory {
+            min-height: 230px;
+            border: 1px solid #222;
+            background: #0b0c0d;
+            padding: 30px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            overflow: hidden;
+        }
+
+        .memory:before {
+            content: "01";
+            position: absolute;
+            top: -30px;
+            right: 10px;
+            font-family: Orbitron;
+            font-size: 130px;
+            color: rgba(255, 23, 68, .035);
+        }
+
+        .memory:nth-child(2):before {
+            content: "02";
+        }
+
+        .memory:nth-child(3):before {
+            content: "03";
+        }
+
+        .memory:nth-child(4):before {
+            content: "04";
+        }
+
+        .memory h3 {
+            color: #fff;
+        }
+
+        .memory p {
+            color: #777;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        /* =========================
+   COUNTER
+========================= */
+
+        .counter {
+            text-align: center;
+            border-top: 1px solid #222;
+            border-bottom: 1px solid #222;
+            padding: 60px 20px;
+        }
+
+        .counter-title {
+            color: #666;
+            font-family: Orbitron;
+            font-size: 11px;
+        }
+
+        #days {
+            font-family: Orbitron;
+            color: #ff1744;
+            font-size: 70px;
+            margin: 15px 0;
+        }
+
+        /* =========================
+   FINAL
+========================= */
+
+        .final {
+            text-align: center;
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .final h2 {
+            font-family: Orbitron;
+            font-size: clamp(35px, 8vw, 90px);
+        }
+
+        .final h2 span {
+            color: #ff1744;
+        }
+
+        .final p {
+            max-width: 650px;
+            color: #777;
+            line-height: 2;
+            margin-top: 25px;
+        }
+
+        .secret-btn {
+            margin-top: 35px;
+            background: transparent;
+            color: #ff1744;
+            border: 1px solid #ff1744;
+            padding: 14px 30px;
+            cursor: pointer;
+            font-family: Cairo;
+        }
+
+        .secret {
+            display: none;
+            margin-top: 30px;
+            padding: 25px;
+            border: 1px solid #3b1119;
+            background: #0d0709;
+            color: #ddd;
+            max-width: 600px;
+            line-height: 2;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #333;
+            font-family: Orbitron;
+            font-size: 9px;
+        }
+
+        /* =========================
+   GLITCH
+========================= */
+
+        .glitch {
+            animation: glitch 4s infinite;
+        }
+
+        @keyframes glitch {
+
+            0%,
+            90%,
+            100% {
+                transform: none;
+            }
+
+            92% {
+                transform: translate(3px, -2px);
+            }
+
+            94% {
+                transform: translate(-3px, 2px);
+            }
+
+            96% {
+                transform: none;
+            }
+
+        }
+
+        /* =========================
+   MOBILE
+========================= */
+
+        @media(max-width:750px) {
+
+            nav {
+                gap: 12px;
+                padding: 10px;
+            }
+
+            nav a {
+                font-size: 9px;
+            }
+
+            .file-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gang {
+                grid-template-columns: 1fr;
+            }
+
+            .memories {
+                grid-template-columns: 1fr;
+            }
+
+            .avatar {
+                height: 220px;
+            }
+
+            .c1,
+            .c2,
+            .c3,
+            .c4 {
+                display: none;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="scan"></div>
+
+    <!-- LOADING -->
+
+    <div class="loader" id="loader">
+
+        <div class="loader-title">
+            CLASSIFIED
+        </div>
+
+        <div class="loader-text">
+            INITIALIZING MANNA FILE...
+        </div>
+
+        <div class="progress">
+            <span></span>
+        </div>
+
+    </div>
+
+
+    <!-- NAV -->
+
+    <nav>
+
+        <a href="#home">HOME</a>
+        <a href="#file">FILE</a>
+        <a href="#message">MESSAGE</a>
+        <a href="#gang">GANG</a>
+        <a href="#final">END</a>
+
+    </nav>
+
+
+    <!-- HERO -->
+
+    <header class="hero" id="home">
+
+        <div class="corner c1"></div>
+        <div class="corner c2"></div>
+        <div class="corner c3"></div>
+        <div class="corner c4"></div>
+
+        <div class="hero-content">
+
+            <div class="classified">
+                ⚠ CLASSIFIED PERSONAL FILE ⚠
+            </div>
+
+            <h1 class="glitch">
+                MANNA<br>
+                <span>LEVEL UP</span>
+            </h1>
+
+            <p class="subtitle">
+
+                اليوم مش يوم عادي...
+                <br>
+                اليوم عيد ميلاد واحدة من أخطر أعضاء العصابة.
+
+            </p>
+
+            <div class="warning">
+
+                ⚠ WARNING ⚠
+                <br><br>
+                هذا الموقع يحتوي على كمية كبيرة
+                من الذكريات والجنون والضحك.
+
+            </div>
+
+            <button class="enter" onclick="document.getElementById('file').scrollIntoView({behavior:'smooth'})">
+
+                ACCESS FILE →
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- FILE -->
+
+    <section id="file">
+
+        <div class="section-label">
+            SUBJECT DATABASE
+        </div>
+
+        <h2 class="section-title">
+            ملف العميلة
+        </h2>
+
+        <div class="file">
+
+            <div class="file-grid">
+
+                <div class="avatar"></div>
+
+                <div class="info">
+
+                    <h3>MANNA</h3>
+
+                    <div class="info-row">
+                        <span>CODENAME</span>
+                        <span>منّة</span>
+                    </div>
+
+                    <div class="info-row">
+                        <span>STATUS</span>
+                        <span>ACTIVE</span>
+                    </div>
+
+                    <div class="info-row">
+                        <span>ROLE</span>
+                        <span>أخت + صديقة + شريكة جريمة</span>
+                    </div>
+
+                    <div class="info-row">
+                        <span>TEAM</span>
+                        <span>العصابة</span>
+                    </div>
+
+                    <div class="info-row">
+                        <span>THREAT LEVEL</span>
+                        <span style="color:#ff1744">MAXIMUM</span>
+                    </div>
+
+                    <div class="info-row">
+                        <span>BIRTHDAY</span>
+                        <span>🎂 TODAY</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- MESSAGE -->
+
+    <section id="message">
+
+        <div class="section-label">
+            PRIVATE TRANSMISSION
+        </div>
+
+        <h2 class="section-title">
+            رسالة من ريم
+        </h2>
+
+        <div class="message">
+
+            <p>
+
+                منّة...
+                <br><br>
+
+                بما إنه اليوم عيد ميلادك،
+                قررت بدل ما أبعثلك معايدة عادية مثل باقي البشر،
+                أعملك ملف سري كامل لأنك أصلًا مش شخصية عادية.
+                <br><br>
+
+                أول شيء لازم تعرفيه:
+                <strong>إنتِ أختي.</strong>
+                وهذا لحاله شيء كبير.
+                <br><br>
+
+                بس المشكلة إنك مع الوقت ما ضليتي بس أختي...
+                صرتِ صاحبتي،
+                وصرتِ الشخص اللي بقدر أعمل معه أغبى الأشياء
+                وأضحك من أتفه سبب،
+                وصرتِ رسميًا شريكتي في كل عمليات
+                <strong>العصابة.</strong>
+                <br><br>
+
+                إحنا مش من نوع الناس اللي يقعدوا يحكوا كلام رومانسي
+                ويكتبوا شعر لبعض.
+                إحنا إذا حبينا بعض غالبًا بنكون بنتخانق
+                وبعد خمس دقائق بنضحك على نفس الموضوع.
+                <br><br>
+
+                بس بين كل المزح والجنون،
+                بدي تعرفي شغلة وحدة:
+                <strong>أنا كثير بحبك.</strong>
+                <br><br>
+
+                وبدي تظلي دايمًا أختي وصاحبتي وشريكتي
+                بكل المغامرات اللي لسا مستنيتنا.
+                <br><br>
+
+                كل سنة وإنتِ منّة،
+                وكل سنة والعصابة أقوى،
+                وكل سنة وإحنا عاملين مشاكل أكثر من السنة اللي قبلها.
+
+            </p>
+
+            <div class="signature">
+                — ريم
+                <br>
+                قائد العصابة الأصلي
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- GANG -->
+
+    <section id="gang">
+
+        <div class="section-label">
+            OPERATION: SISTERHOOD
+        </div>
+
+        <h2 class="section-title">
+            قوانين العصابة
+        </h2>
+
+        <div class="gang">
+
+            <div class="gang-card">
+
+                <div class="number">01</div>
+
+                <h3>
+                    ممنوع الملل
+                </h3>
+
+                <p>
+                    أي يوم عادي لازم يتحول لمصيبة
+                    أو موقف نضحك عليه بعدين.
+                </p>
+
+            </div>
+
+
+            <div class="gang-card">
+
+                <div class="number">02</div>
+
+                <h3>
+                    السرية التامة
+                </h3>
+
+                <p>
+                    أي شيء يصير بين العصابة
+                    يظل داخل العصابة.
+                </p>
+
+            </div>
+
+
+            <div class="gang-card">
+
+                <div class="number">03</div>
+
+                <h3>
+                    ممنوع التخلي
+                </h3>
+
+                <p>
+                    مهما صار ومهما اختلفنا،
+                    بالنهاية إحنا بعض.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- MEMORIES -->
+
+    <section>
+
+        <div class="section-label">
+            ARCHIVED MEMORIES
+        </div>
+
+        <h2 class="section-title">
+            أرشيف العصابة
+        </h2>
+
+        <div class="memories">
+
+            <div class="memory">
+
+                <h3>
+                    الضحك بدون سبب
+                </h3>
+
+                <p>
+                    وأكيد السبب موجود...
+                    بس إحنا نفسنا مش عارفينه.
+                </p>
+
+            </div>
+
+
+            <div class="memory">
+
+                <h3>
+                    المغامرات
+                </h3>
+
+                <p>
+                    كل مرة بنقول "آخر مرة"
+                    وبنرجع نعيدها.
+                </p>
+
+            </div>
+
+
+            <div class="memory">
+
+                <h3>
+                    الخناقات الأسطورية
+                </h3>
+
+                <p>
+                    خمس دقائق زعل،
+                    وبعدها بنرجع نضحك.
+                </p>
+
+            </div>
+
+
+            <div class="memory">
+
+                <h3>
+                    ذكريات لسا ما صارت
+                </h3>
+
+                <p>
+                    لأن أحلى جزء من القصة
+                    لسا قدامنا.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- COUNTER -->
+
+    <section>
+
+        <div class="counter">
+
+            <div class="counter-title">
+                YEARS OF BEING AWESOME
+            </div>
+
+            <div id="days">
+                🎂
+            </div>
+
+            <div style="color:#666">
+                سنة جديدة...
+                مستوى جديد...
+                ومصايب جديدة.
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FINAL -->
+
+    <section class="final" id="final">
+
+        <div class="section-label">
+            MISSION COMPLETE
+        </div>
+
+        <h2>
+            HAPPY <span>BIRTHDAY</span>
+            <br>
+            MANNA
+        </h2>
+
+        <p>
+
+            من أختك الكبيرة ريم،
+            اللي رسميًا ما بتضمن أي شيء ممكن يصير
+            في السنة الجديدة من عمرِك.
+            <br><br>
+
+            بس شيء واحد مضمون:
+            مهما كبرنا،
+            رح تظلي أختي،
+            صاحبتي،
+            وشريكتي في العصابة.
+            <br><br>
+
+            <strong style="color:#ff1744">
+                كل عام وإنتِ بخير يا منّة.
+            </strong>
+
+        </p>
+
+        <button class="secret-btn" onclick="secretMessage()">
+            ACCESS SECRET MESSAGE
+        </button>
+
+        <div class="secret" id="secret">
+
+            🚨 SECRET MESSAGE UNLOCKED 🚨
+
+            <br><br>
+
+            يا منّة،
+            إذا وصلتي لهون فأنتِ رسميًا
+            عميلة موثوقة في العصابة.
+
+            <br><br>
+
+            وبعيدًا عن كل الهبل...
+
+            <br><br>
+
+            أنا محظوظة إنك أختي،
+            ومحظوظة أكثر إنك صرتِ صاحبتي.
+
+            <br><br>
+
+            بحبك يا مجنونة.
+            🤍
+
+            <br><br>
+
+            — ريم
+
+        </div>
+
+    </section>
+
+
+    <footer>
+
+        CLASSIFIED FILE ©
+        <br>
+        THE GANG — REM & MANNA
+
+    </footer>
+
+
+    <script>
+
+        /* =========================
+           LOADING
+        ========================= */
+
+        window.addEventListener("load", function () {
+
+            setTimeout(function () {
+
+                document.getElementById("loader")
+                    .classList.add("hide");
+
+            }, 2700);
+
+        });
+
+
+        /* =========================
+           SECRET MESSAGE
+        ========================= */
+
+        function secretMessage() {
+
+            const box =
+                document.getElementById("secret");
+
+            box.style.display = "block";
+
+            createExplosion();
+
+        }
+
+
+        /* =========================
+           HEART / PARTICLES
+        ========================= */
+
+        function createExplosion() {
+
+            const symbols = [
+                "★",
+                "✦",
+                "✧",
+                "♥",
+                "⚡"
+            ];
+
+            for (let i = 0; i < 35; i++) {
+
+                const item =
+                    document.createElement("div");
+
+                item.innerHTML =
+                    symbols[
+                    Math.floor(
+                        Math.random() * symbols.length
+                    )
+                    ];
+
+                item.style.position = "fixed";
+                item.style.left = "50%";
+                item.style.top = "50%";
+                item.style.color =
+                    i % 2 === 0 ? "#ff1744" : "#ffffff";
+                item.style.fontSize =
+                    (10 + Math.random() * 25) + "px";
+                item.style.pointerEvents = "none";
+                item.style.zIndex = "1500";
+
+                const x =
+                    (Math.random() - 0.5) * 800;
+
+                const y =
+                    (Math.random() - 0.5) * 600;
+
+                item.animate([
+
+                    {
+                        transform: "translate(-50%,-50%) scale(0)",
+                        opacity: 1
+                    },
+
+                    {
+                        transform:
+                            `translate(${x}px,${y}px) scale(1.5)`,
+                        opacity: 0
+                    }
+
+                ], {
+
+                    duration: 1200 +
+                        Math.random() * 700,
+
+                    easing: "cubic-bezier(.17,.67,.4,1)"
+
+                });
+
+                document.body.appendChild(item);
+
+                setTimeout(() => {
+                    item.remove();
+                }, 2000);
+
+            }
+
+        }
+
+
+        /* =========================
+           RANDOM GLITCH
+        ========================= */
+
+        setInterval(() => {
+
+            const title =
+                document.querySelector(".hero h1");
+
+            title.style.transform =
+                "translateX(" +
+                (Math.random() * 4 - 2) +
+                "px)";
+
+            setTimeout(() => {
+
+                title.style.transform = "";
+
+            }, 100);
+
+        }, 5000);
+
+    </script>
+
+</body>
+
+</html>
